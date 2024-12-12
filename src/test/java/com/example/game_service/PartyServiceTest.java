@@ -30,7 +30,6 @@ public class PartyServiceTest {
 
     @Test
     public void testCreateParty() {
-        // Préparation des données
         PartyDTO partyDTO = new PartyDTO();
         partyDTO.setDate(LocalDateTime.now());
         partyDTO.setTypePartie("Arcade");
@@ -44,13 +43,10 @@ public class PartyServiceTest {
         savedParty.setScoreMaximum(100);
         savedParty.setIdHote(1L);
 
-        // Configurer le mock
         when(partyRepository.save(any(Party.class))).thenReturn(savedParty);
 
-        // Appel du service
         Party result = partyService.createParty(partyDTO);
 
-        // Vérifications
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Arcade", result.getTypePartie());
@@ -61,20 +57,16 @@ public class PartyServiceTest {
 
     @Test
     public void testGetPartyById_Found() {
-        // Préparation des données
         Party party = new Party();
         party.setId(1L);
         party.setTypePartie("Classic");
         party.setScoreMaximum(50);
         party.setIdHote(2L);
 
-        // Configurer le mock
         when(partyRepository.findById(1L)).thenReturn(Optional.of(party));
 
-        // Appel du service
         Party result = partyService.getPartyById(1L);
 
-        // Vérifications
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Classic", result.getTypePartie());
@@ -84,20 +76,16 @@ public class PartyServiceTest {
 
     @Test
     public void testGetPartyById_NotFound() {
-        // Configurer le mock
         when(partyRepository.findById(1L)).thenReturn(Optional.empty());
 
-        // Appel du service
         Party result = partyService.getPartyById(1L);
 
-        // Vérifications
         assertNull(result);
         verify(partyRepository, times(1)).findById(1L);
     }
 
     @Test
     public void testGetAllParties() {
-        // Préparation des données
         Party party1 = new Party();
         party1.setId(1L);
         party1.setTypePartie("Classic");
@@ -108,13 +96,10 @@ public class PartyServiceTest {
 
         List<Party> parties = Arrays.asList(party1, party2);
 
-        // Configurer le mock
         when(partyRepository.findAll()).thenReturn(parties);
 
-        // Appel du service
         List<Party> result = partyService.getAllParties();
 
-        // Vérifications
         assertNotNull(result);
         assertEquals(2, result.size());
         verify(partyRepository, times(1)).findAll();
@@ -122,10 +107,8 @@ public class PartyServiceTest {
 
     @Test
     public void testDeleteParty() {
-        // Appel du service
         partyService.deleteParty(1L);
 
-        // Vérifications
         verify(partyRepository, times(1)).deleteById(1L);
     }
 }

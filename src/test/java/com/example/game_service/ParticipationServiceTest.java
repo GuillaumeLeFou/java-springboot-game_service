@@ -37,7 +37,6 @@ public class ParticipationServiceTest {
 
     @Test
     public void testCreateParticipation() {
-        // Préparation des données
         ParticipationDTO participationDTO = new ParticipationDTO();
         participationDTO.setIdPartie(1L);
         participationDTO.setIdJoueur(2L);
@@ -51,14 +50,11 @@ public class ParticipationServiceTest {
         savedParticipation.setScore(100);
         savedParticipation.setVictoire(true);
 
-        // Configurer les mocks
         when(participationDAO.save(any(Participation.class))).thenReturn(savedParticipation);
         doNothing().when(playerServiceClient).updatePlayer(2L, 100, true);
 
-        // Appel du service
         Participation result = participationService.createParticipation(participationDTO);
 
-        // Vérifications
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals(1L, result.getIdPartie());
@@ -71,7 +67,6 @@ public class ParticipationServiceTest {
 
     @Test
     public void testGetParticipationById_Found() {
-        // Préparation des données
         Participation participation = new Participation();
         participation.setId(1L);
         participation.setIdPartie(1L);
@@ -79,13 +74,10 @@ public class ParticipationServiceTest {
         participation.setScore(50);
         participation.setVictoire(false);
 
-        // Configurer le mock
         when(participationDAO.findById(1L)).thenReturn(Optional.of(participation));
 
-        // Appel du service
         Participation result = participationService.getParticipationById(1L);
 
-        // Vérifications
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals(1L, result.getIdPartie());
@@ -97,20 +89,16 @@ public class ParticipationServiceTest {
 
     @Test
     public void testGetParticipationById_NotFound() {
-        // Configurer le mock
         when(participationDAO.findById(1L)).thenReturn(Optional.empty());
 
-        // Appel du service
         Participation result = participationService.getParticipationById(1L);
 
-        // Vérifications
         assertNull(result);
         verify(participationDAO, times(1)).findById(1L);
     }
 
     @Test
     public void testGetAllParticipations() {
-        // Préparation des données
         Participation participation1 = new Participation();
         participation1.setId(1L);
 
@@ -119,13 +107,10 @@ public class ParticipationServiceTest {
 
         List<Participation> participations = Arrays.asList(participation1, participation2);
 
-        // Configurer le mock
         when(participationDAO.findAll()).thenReturn(participations);
 
-        // Appel du service
         List<Participation> result = participationService.getAllParticipations();
 
-        // Vérifications
         assertNotNull(result);
         assertEquals(2, result.size());
         verify(participationDAO, times(1)).findAll();
@@ -133,10 +118,8 @@ public class ParticipationServiceTest {
 
     @Test
     public void testDeleteParticipation() {
-        // Appel du service
         participationService.deleteParticipation(1L);
 
-        // Vérifications
         verify(participationDAO, times(1)).deleteById(1L);
     }
 }

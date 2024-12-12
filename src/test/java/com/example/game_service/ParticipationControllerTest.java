@@ -34,7 +34,6 @@ public class ParticipationControllerTest {
 
     @Test
     public void testCreateParticipation() throws Exception {
-        // Préparation des données
         ParticipationDTO participationDTO = new ParticipationDTO();
         participationDTO.setIdPartie(1L);
         participationDTO.setIdJoueur(2L);
@@ -48,10 +47,8 @@ public class ParticipationControllerTest {
         participation.setScore(100);
         participation.setVictoire(true);
 
-        // Configurer le mock
         when(participationService.createParticipation(Mockito.any(ParticipationDTO.class))).thenReturn(participation);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(post("/Participation")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(participationDTO)))
@@ -67,7 +64,6 @@ public class ParticipationControllerTest {
 
     @Test
     public void testGetParticipationById_Found() throws Exception {
-        // Préparation des données
         Participation participation = new Participation();
         participation.setId(1L);
         participation.setIdPartie(1L);
@@ -75,10 +71,8 @@ public class ParticipationControllerTest {
         participation.setScore(50);
         participation.setVictoire(false);
 
-        // Configurer le mock
         when(participationService.getParticipationById(1L)).thenReturn(participation);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(get("/Participation/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
@@ -92,10 +86,8 @@ public class ParticipationControllerTest {
 
     @Test
     public void testGetParticipationById_NotFound() throws Exception {
-        // Configurer le mock
         when(participationService.getParticipationById(1L)).thenReturn(null);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(get("/Participation/1"))
                 .andExpect(status().isNotFound());
 
@@ -104,7 +96,6 @@ public class ParticipationControllerTest {
 
     @Test
     public void testGetAllParticipations() throws Exception {
-        // Préparation des données
         Participation participation1 = new Participation();
         participation1.setId(1L);
 
@@ -113,10 +104,8 @@ public class ParticipationControllerTest {
 
         List<Participation> participations = Arrays.asList(participation1, participation2);
 
-        // Configurer le mock
         when(participationService.getAllParticipations()).thenReturn(participations);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(get("/Participation"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(2))

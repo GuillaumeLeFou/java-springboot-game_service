@@ -31,7 +31,6 @@ public class PartyControllerTest {
 
     @Test
     public void testCreateParty() throws Exception {
-        // Préparation des données
         PartyDTO partyDTO = new PartyDTO();
         partyDTO.setDate(java.time.LocalDateTime.now());
         partyDTO.setTypePartie("Arcade");
@@ -44,10 +43,8 @@ public class PartyControllerTest {
         party.setScoreMaximum(100);
         party.setIdHote(1L);
 
-        // Configurer le mock
         when(partyService.createParty(Mockito.any(PartyDTO.class))).thenReturn(party);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(post("/Party")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(partyDTO)))
@@ -62,17 +59,14 @@ public class PartyControllerTest {
 
     @Test
     public void testGetPartyById_Found() throws Exception {
-        // Préparation des données
         Party party = new Party();
         party.setId(1L);
         party.setTypePartie("Arcade");
         party.setScoreMaximum(100);
         party.setIdHote(1L);
 
-        // Configurer le mock
         when(partyService.getPartyById(1L)).thenReturn(party);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(get("/Party/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
@@ -85,10 +79,8 @@ public class PartyControllerTest {
 
     @Test
     public void testGetPartyById_NotFound() throws Exception {
-        // Configurer le mock
         when(partyService.getPartyById(1L)).thenReturn(null);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(get("/Party/1"))
                 .andExpect(status().isNotFound());
 
@@ -97,10 +89,8 @@ public class PartyControllerTest {
 
     @Test
     public void testDeleteParty() throws Exception {
-        // Configurer le mock
         doNothing().when(partyService).deleteParty(1L);
 
-        // Effectuer la requête et vérifier la réponse
         mockMvc.perform(delete("/Party/1"))
                 .andExpect(status().isNoContent());
 
