@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.game_service.dto.PlayerUpdateRequestDTO;
-
 @Component
 public class PlayerServiceClient {
 

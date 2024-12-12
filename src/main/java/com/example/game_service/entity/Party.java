@@ -1,7 +1,6 @@
 package com.example.game_service.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

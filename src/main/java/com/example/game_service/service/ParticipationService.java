@@ -7,21 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.example.game_service.client.PlayerServiceClient;
 import com.example.game_service.dao.ParticipationDAO;
-import com.example.game_service.dao.PartyDAO;
 import com.example.game_service.dto.ParticipationDTO;
-import com.example.game_service.dto.PartyDTO;
 import com.example.game_service.entity.Participation;
-import com.example.game_service.entity.Party;
-import com.example.game_service.repository.PartyRepository;
 
 @Service
 public class ParticipationService implements IParticipationService{
 
     @Autowired
     private ParticipationDAO participationDAO;
-
-    @Autowired
-    private PartyDAO partyDAO;
 
     @Autowired
     private PlayerServiceClient playerServiceClient;

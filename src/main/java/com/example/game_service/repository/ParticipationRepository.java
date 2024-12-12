@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.game_service.entity.Participation;
-import com.example.game_service.entity.Party;
 
 @Repository
 public interface ParticipationRepository extends JpaRepository<Participation, Long>{

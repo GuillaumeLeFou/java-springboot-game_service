@@ -1,6 +1,5 @@
 package com.example.game_service.dao;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,5 @@ public class PartyDAO {
     public void deletePartyById(Long id) {
         partyRepository.deleteById(id);
     }
-
-    // public void updatePlayer(Long idJoueur, int score, boolean victoire) {
-    //     partyRepository.updatePlayer(idJoueur, score, victoire);
-    // }
 
 }
