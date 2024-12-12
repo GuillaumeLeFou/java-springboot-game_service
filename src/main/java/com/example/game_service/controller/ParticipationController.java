@@ -1,10 +1,7 @@
 package com.example.game_service.controller;
 
-import com.example.game_service.dto.PartyDTO;
 import com.example.game_service.dto.ParticipationDTO;
-import com.example.game_service.entity.Party;
 import com.example.game_service.entity.Participation;
-import com.example.game_service.service.PartyService;
 import com.example.game_service.service.ParticipationService;
 
 import java.util.List;

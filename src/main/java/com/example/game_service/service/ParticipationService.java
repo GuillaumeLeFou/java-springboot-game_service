@@ -35,12 +35,6 @@ public class ParticipationService implements IParticipationService{
         participation.setVictoire(participationDTO.isVictoire());
 
         playerServiceClient.updatePlayer(participationDTO.getIdJoueur(), participationDTO.getScore(), participationDTO.isVictoire());
-
-        // partyDAO.updatePlayer(
-        //     participationDTO.getIdJoueur(),
-        //     participationDTO.getScore(),
-        //     participationDTO.isVictoire()
-        // );
         return participationDAO.save(participation);
     }
 

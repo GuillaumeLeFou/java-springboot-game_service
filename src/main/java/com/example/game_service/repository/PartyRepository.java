@@ -19,9 +19,4 @@ public interface PartyRepository extends JpaRepository<Party, Long> {
     Optional<Party> findById(Long id);
     Party save(Party party);
     void deleteById(Long id);
-
-    // @Modifying
-    // @Transactional
-    // @Query("UPDATE Party p SET p.score = p.score + :score, p.victoire = :victoire WHERE p.idHote = :idHote")
-    // void updatePlayer(@Param("idHote") Long idHote, @Param("score") int score, @Param("victoire") boolean victoire);
 }

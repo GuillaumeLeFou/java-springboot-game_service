@@ -21,8 +21,6 @@ public class Party {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // private LocalDateTime date;
-
     private String typePartie;
 
     private int scoreMaximum;
